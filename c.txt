@@ -1,3 +1,0 @@
-code.c
-test.c
-akbscd.c
