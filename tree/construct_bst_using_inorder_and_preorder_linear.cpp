@@ -7,20 +7,7 @@ struct node
     node *left,*right;
 };
 
-int binarySearch(int a[],int l,int r,int key)
-{
-	while(l<=r)
-	{
-		int mid = l+(r-l)/2;
-
-		if(key == a[mid]) return mid;
-
-		if(key>a[mid]) l=mid+1;
-		else 		   r=mid-1;
-	}
-	
-	return -1;
-}
+map<int,int> mp; // map used to store (value , index) of inorder traverser
 
 node* construct_tree(int preorder[],int inorder[],int low,int high)
 {
@@ -32,7 +19,7 @@ node* construct_tree(int preorder[],int inorder[],int low,int high)
 
 	if(low==high) return ptr;
 
-	int mid = binarySearch(inorder,low,high,ptr->info); // logn
+	int mid = mp[ptr->info]; // O(1)
 
 	ptr->left  = construct_tree(preorder,inorder,low,mid-1);	// build LST
 	ptr->right = construct_tree(preorder,inorder,mid+1,high);	// build RST
@@ -189,7 +176,7 @@ int main()
 
     int inorder[n],preorder[n]; 
 
-    cout<<"enter inorder traversal : "; 	for(int i=0; i<n; i++) cin>>inorder[i];
+    cout<<"enter inorder traversal : "; 	for(int i=0; i<n; i++) { cin>>inorder[i]; mp[inorder[i]] = i; }
     cout<<"enter preorder traversal : "; 	for(int i=0; i<n; i++) cin>>preorder[i];
 
     node *root = construct_tree(preorder,inorder,0,n-1);
