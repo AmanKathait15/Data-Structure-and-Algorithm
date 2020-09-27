@@ -24,7 +24,7 @@ int min_steps_reach_knight(int n,coord k,coord t)
 	{
 		coord tmp = Q.front(); Q.pop();
 
-		cout<<tmp.x<<" "<<tmp.y<<" "<<tmp.d<<"\n";
+		//cout<<tmp.x<<" "<<tmp.y<<" "<<tmp.d<<"\n";
 
 		if(tmp.x==t.x and tmp.y==t.y) return tmp.d;
 
