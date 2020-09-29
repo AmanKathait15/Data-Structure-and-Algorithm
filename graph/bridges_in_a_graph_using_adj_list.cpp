@@ -1,24 +1,27 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void dfs(vector<int> g[],bool visited[],int i)
+void dfs(list<int> g[],bool visited[],int i)
 {
-	for(int j=0; j<g[i].size(); j++)
+	visited[i] = 1;
+
+	for(auto j=g[i].begin(); j!=g[i].end(); j++)
 	{
-		if(!visited[g[i][j]])
-		{
-			visited[g[i][j]]=1; dfs(g,visited,g[i][j]);
-		}
+		int u = *j;	if(!visited[u])	dfs(g,visited,u);
 	}
 }
 
-bool isConnected(vector<int> g[],int V)
+bool isConnected(list<int> g[],int V)
 {
-	bool visited[V+1]={0}; visited[0]=1;
 
-	dfs(g,visited,0);
+	/*for(int i=0; i<V; i++)
+	{
+		cout<<"\n"<<i<<" : "; for(auto j=g[i].begin(); j!=g[i].end(); j++)	cout<<*j<<" ";
+	}	cout<<"\n";*/
 
-	for(int i=0; i<V; i++) cout<<visited[i]<<" "; cout<<"\n";
+	bool visited[V]={0};	dfs(g,visited,0);
+
+	//for(int i=0; i<V; i++) cout<<visited[i]<<" "; cout<<"\n";
 
 	for(int i=0; i<V; i++) if(visited[i]==0) return 0;
 
@@ -27,7 +30,7 @@ bool isConnected(vector<int> g[],int V)
 
 int main()
 {
-	int V,E; cin>>V>>E; vector<int> g[V];
+	int V,E; cin>>V>>E; list<int> g[V];
 
 	vector<pair<int,int>> edge,bridge;
 
@@ -43,8 +46,8 @@ int main()
 	{
 		int x=i->first,y=i->second;
 
-		remove(g[x].begin(),g[x].end(),y); // O(n)
-		remove(g[y].begin(),g[y].end(),x); // O(n)
+		g[x].remove(y); // O(n)
+		g[y].remove(x); // O(n)
 
 		if(!isConnected(g,V))
 		{
