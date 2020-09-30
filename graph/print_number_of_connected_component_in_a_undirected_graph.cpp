@@ -3,7 +3,7 @@ using namespace std;
 
 void dfs(vector<int> g[],bool visited[],int src)
 {
-	visited[src]=1;
+	visited[src]=1; cout<<src<<" ";
 
 	for(auto i=g[src].begin(); i!=g[src].end(); i++)
 	{
@@ -22,15 +22,14 @@ int main()
 
 	bool visited[V]={0}; int c=0;
 
-	cout<<"connected components in graph : ";
+	cout<<"connected components in graph : \n";
 
 	for(int i=0; i<V; i++)	
 	{
 		if(!visited[i])
 		{
-			c++; dfs(g,visited,i); cout<<"\n"<<i<<" ";
+			dfs(g,visited,i); cout<<"\n";
 		}
-		else cout<<i<<" ";
 	}
 
 	return 0;
