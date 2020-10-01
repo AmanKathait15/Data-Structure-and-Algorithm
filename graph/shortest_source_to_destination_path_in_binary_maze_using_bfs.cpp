@@ -1,59 +1,66 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define vect vector<vector<int>>
+#define vect vector<vector<bool>>
 
 //https://www.geeksforgeeks.org/shortest-path-in-a-binary-maze/
+
+struct coord
+{
+	int x=0,y=0,d=0;
+};
 
 int Dx[] = {-1,1,0,0};
 int Dy[] = {0,0,-1,1};
 
-bool shortest_path(vect &graph,int sx,int sy,int dx,int dy,int n,int m)
+int shortest_path(vect &graph,coord src,coord dst,int n,int m)
 {
-	queue<pair<int,int>> Q; Q.push({sx,sy}); graph[sx][sy]=0;
+	if(graph[src.x][src.y]==0 || graph[dst.x][dst.y]==0) return -1;
+	
+	if(src.x == dst.x and src.y == dst.y) return 0;
+
+	queue<coord> Q; Q.push(src); graph[src.x][src.y]=0;
 
 	while(!Q.empty())
 	{
-		pair<int,int> p = Q.front(); Q.pop();
+		src = Q.front(); Q.pop();
 
 		for(int i=0; i<4; i++)
 		{
-			int x=p.first,y=p.second; x+=Dx[i]; y+=Dy[i];
+			coord tmp = src; tmp.x+=Dx[i]; tmp.y+=Dy[i]; tmp.d++;
 
-			if(x==dx and y==dy) return 1;
+			if(tmp.x == dst.x and tmp.y == dst.y) return tmp.d;
 
-			if(x>=0 and x<n and y>=0 and y<n and graph[x][y])
+			if(tmp.x>=0 and tmp.x<n and tmp.y>=0 and tmp.y<n and graph[tmp.x][tmp.y])
 			{
-				Q.push({x,y}); graph[x][y]=0;
+				Q.push(tmp); graph[tmp.x][tmp.y]=0;
 			}
 		}
 
 	} 
 
-	return 0;
+	return -1;
 }
 
 int main()
 {
-	int n,m,sx,sy,dx,dy; vect graph(n,vector<int>(m)); cin>>n>>m;
-
-	for(int i=0; i<n; i++)
+	int t; cin>>t; 
+	
+	while(t--)
 	{
-		for(int j=0; j<m; j++)
-		{
-			cin>>graph[i][j];
-		}
-	}
+	    int n,m; cin>>n>>m; vect graph(n,vector<bool>(m)); coord src,dst;
 
-	cout<<"enter source and destination coordinate : \n";	cin>>sx>>sy>>dx>>dy;
+	    for(int i=0; i<n; i++)
+	    {
+	    	for(int j=0; j<m; j++)
+	    	{
+	    		int x; cin>>x; if(x) graph[i][j]=1; else graph[i][j]=0;
+	    	}
+	    }
+	    
+	    cin>>dst.x>>dst.y;
 
-	if(graph[sx][sy] and graph[dx][dy] and shortest_path(graph,sx,sy,dx,dy,n,m))
-	{
-		cout<<"path exist \n";
+	    int ans = shortest_path(graph,src,dst,n,m); cout<<ans<<"\n";
 	}
-	else
-	{
-		cout<<"path not exist \n";
-	}
-
+	
 	return 0;
 }
