@@ -31,6 +31,7 @@ bool bfs(vector<int> graph[],vector<bool> &visited,int parent[],int u)
 			{
 				Q.push(v); visited[v]=1; parent[v]=u;
 			}
+			else if(u==v) 			   return 1;	//for self loops
 			else if(find(parent,u)==v) return 1;
 		}
 	}
