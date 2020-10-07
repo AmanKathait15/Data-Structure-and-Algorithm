@@ -3,7 +3,7 @@ using namespace std;
 
 void bfs(vector<pair<int,int>> graph[],vector<int> &dist,int u)
 {
-	queue<int> Q; dist[u]=0; Q.push(u); int iter=0;
+	queue<int> Q; dist[u]=0; Q.push(u); //int iter=0;
 
 	while(!Q.empty())
 	{
@@ -13,7 +13,7 @@ void bfs(vector<pair<int,int>> graph[],vector<int> &dist,int u)
 
 		for(auto i=graph[u].begin(); i!=graph[u].end(); i++)
 		{
-			int v=i->first,w=i->second; iter++;
+			int v=i->first,w=i->second; //iter++;
 
 			if(dist[v] > dist[u]+w)
 			{
@@ -22,7 +22,7 @@ void bfs(vector<pair<int,int>> graph[],vector<int> &dist,int u)
 		}
 	}
 
-	cout<<iter<<"\n";
+	//cout<<iter<<"\n";
 }
 
 int main()
