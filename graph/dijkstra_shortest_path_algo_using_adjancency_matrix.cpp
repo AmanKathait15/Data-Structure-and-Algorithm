@@ -2,7 +2,7 @@
 using namespace std;
 #define Pair pair<int,int>
 
-void shortest_dist(vector<vector<int>> graph,vector<int> &dist,int u)
+void shortest_dist(vector<Pair> graph[],vector<int> &dist,int u)
 {
 	priority_queue<Pair> pq; pq.push({0,u}); dist[u]=0; //int iter=0;
 
@@ -12,7 +12,7 @@ void shortest_dist(vector<vector<int>> graph,vector<int> &dist,int u)
 
 		//for(auto i=dist.begin(); i!=dist.end(); i++) cout<<*i<<" "; cout<<"\n";
 
-		for(int i=0; i<graph[]; i++)
+		for(auto i=graph[u].begin(); i!=graph[u].end(); i++)
 		{
 			int v = i->first , w = i->second; //iter++;
 
@@ -28,14 +28,11 @@ void shortest_dist(vector<vector<int>> graph,vector<int> &dist,int u)
 
 int main()
 {
-	int V,E,src; cin>>V>>E; vector<vector<int>> graph(V,vector<int>(V)); vector<int> dist(V,INT_MAX);
+	int V,E,src; cin>>V>>E; vector<Pair> graph[V]; vector<int> dist(V,INT_MAX);
 
-	for(int i=0; i<V; i++)
+	for(int i=0; i<E; i++)
 	{
-		for(int j=0; j<V; j++)
-		{
-			cin>>graph[i][j];
-		}
+		int x,y,w; cin>>x>>y>>w; graph[x].push_back({y,w}); graph[y].push_back({x,w});
 	}
 
 	cout<<"enter source node : "; cin>>src;
