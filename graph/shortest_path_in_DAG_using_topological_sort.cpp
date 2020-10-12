@@ -24,6 +24,8 @@ void single_src_shortest_path(vector<Pair> graph[],int V,int src)
 
 	for(int i=0; i<V; i++) if(!visited[i]) topological_sort(graph,op,visited,i);
 
+	//for(auto i=op.rbegin(); i!=op.rend(); i++) cout<<*i<<" "; 
+
 	for(auto i=op.rbegin(); i!=op.rend(); i++)
 	{
 		int u = *i;
@@ -37,9 +39,11 @@ void single_src_shortest_path(vector<Pair> graph[],int V,int src)
 				if(dist[v]>dist[u]+w)	dist[v] = dist[u]+w;
 			}
 		}
+
+		//for(auto i=dist.begin(); i!=dist.end(); i++) cout<<*i<<" "; cout<<"\n";
 	}
 
-	for(auto i=op.begin(); i!=op.end(); i++) cout<<*i<<" ";
+	for(auto i=dist.begin(); i!=dist.end(); i++) cout<<*i<<" "; cout<<"\n";
 }
 
 int main()
@@ -61,6 +65,7 @@ int main()
 // Test Case
 
 /*
+6 9
 0 1 5
 0 2 3
 1 3 6
@@ -97,24 +102,4 @@ int main()
 5 3 14
 5 4 10
 3 4 9
-*/
-
-/*
-6 6
-5 2 
-5 0 
-4 0 
-4 1 
-2 3 
-3 1
-*/
-
-/*
-6 6
-5 0 5 2 2 3 4 0 4 1 1 3
-*/
-
-/*
-4 3
-3 0 1 0 2 0
 */
