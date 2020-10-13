@@ -1,10 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//https://www.hackerrank.com/challenges/find-the-running-median/copy-from/147687194?isFullScreen=true
+
 int main()
 {
     int n,l=0,r=0; cin>>n; float median,a;
-    
+
     set<pair<float,float>> s; 
 
     cin>>a; s.insert({a,0}); median = a; printf("%0.1f\n",median);
@@ -37,5 +39,6 @@ int main()
             it++; a=it->first; it--; printf("%0.1f\n",(median+a)/2.0);
         } 
     }
+
     return 0;
 }
