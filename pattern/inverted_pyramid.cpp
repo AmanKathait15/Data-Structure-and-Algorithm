@@ -1,13 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void pyramid(int n)
+void inverted_pyramid(int n)
 {
-	for(int i=1; i<=n; i++)
+	for(int i=n; i>0; i--)
 	{
-		for(int j=i; j<n; j++) cout<<" "; // spaces
+		for(int j=i; j<n; j++)		cout<<" ";	// spaces
 
-		for(int j=0; j<2*i-1; j++)	cout<<"*";
+		for(int j=0; j<2*i-1; j++)  cout<<"*";	// stars
 
 		cout<<"\n";
 	}
@@ -23,7 +23,7 @@ int main()
 
 		system("clear"); 
 
-		pyramid(n); 
+		inverted_pyramid(n); 
 	}
 
 	return 0;

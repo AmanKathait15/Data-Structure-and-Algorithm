@@ -1,15 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void pyramid(int n)
+void rhombus(int n)
 {
 	for(int i=1; i<=n; i++)
 	{
-		for(int j=i; j<n; j++) cout<<" "; // spaces
+		for(int j=i; j<n; j++) cout<<" ";
 
-		for(int j=0; j<2*i-1; j++)	cout<<"*";
-
-		cout<<"\n";
+		for(int j=0; j<n; j++) cout<<"*"; cout<<"\n";
 	}
 }
 
@@ -23,7 +21,7 @@ int main()
 
 		system("clear"); 
 
-		pyramid(n); 
+		rhombus(n); 
 	}
 
 	return 0;
